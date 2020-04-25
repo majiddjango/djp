@@ -1,0 +1,57 @@
+*{
+    border: none;
+    border-radius: 0 !important;
+}
+
+.close{
+    right: unset !important;
+    left: 0 !important;
+}
+
+body{
+    background-color: ghostwhite;
+}
+
+.tab-pane{
+    background-color: white;
+    border-radius: 0px 0px 15px 15px !important;
+}
+
+.nav-tabs .nav-item{
+
+    border: none;
+    border-radius: 15px 15px 0 0 !important;
+    background-color: white;
+    border-bottom: tomato solid 1px !important;
+}
+.nav-tabs .nav-item.active{
+    border: tomato solid 1px !important;
+    background-color: white;
+}
+
+
+.card{
+    
+    border-radius: 15px !important;
+}
+
+.card-header {
+    border-radius: 15px 15px 0 0 !important;
+}
+.card-footer {
+    border-radius: 0 0 15px 15px !important;
+}
+.myrounded{
+    border-radius: 15px !important;
+}
+
+.hover_shadow:hover{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+} 
+
+
+
+
+input{
+    border-bottom: olive 1px solid !important;
+}

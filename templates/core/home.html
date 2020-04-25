@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+{% load widget_tweaks %}
+
+<div class="container mt-2 mx-auto">
+    <div class="card text-right hover_shadow">
+        <div class="card-header">
+            چی رو کجا گذاشتی؟
+        </div>
+        <form id="myform" action="" method="POST">
+            {% csrf_token %}
+            <div class="card-body">
+                <div class="row mt-1">
+                    <div class="col-1"><label for="id_what">چی؟</label></div>
+                    <div class="col-11">
+                        {{ form.what|add_class:"form-control"|attr:"placeholder:مثلا کفش، مسواک" }}
+                    </div>
+                </div>
+                <div class="row mt-1">
+                    <div class="col-1"><label for="id_where">کجا؟</label></div>
+                    <div class="col-11">
+                        {{ form.where|add_class:"form-control"|attr:"placeholder:تو کشو سوم جا کفشی" }}
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer text-muted">
+                <div class="row">
+                    <div class="col-5">
+                        <div class="form-group">
+                          <input type="password" class="form-control" id="password" aria-describedby="helpId" placeholder="رمز برای ذخیره سازی">
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <button id="subbutton" disabled class="btn btn-primary">ذخیره</button>
+                        <span>برای فعال شدن رمز  (بیشتر از 4 کاراکتر) وارد کنید.</span>
+                    </div>
+                </div>
+                  
+              
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<div class="container mb-5 mt-2 pb-5 pt-2">
+    {% if items %}
+    <div class="row my-1 bg-white m-0 p-3 myrounded">
+        <div class="col-12 col-md-6 mt-1">
+            <input  class="form-control" name="search" type="text" id="myInput" onkeyup="myFunction()" placeholder="جستجو ..." >
+        </div>
+
+        <div class="col-12 col-md-6 mt-1">
+            <input  class="form-control" type="password" id="repass" placeholder="رمز خود را که هنگام رمز نگاری وارد کرده اید بنویسید."> 
+        </div>
+
+    </div>
+    <table id="myTable" class="table table-hover mb-5 table-striped text-right bg-white">
+        <thead class="">
+            <tr>
+                <th>چی</th>
+                <th>کجا</th>
+            </tr>
+        </thead>
+        <tbody class="">
+            {% for item in items %}
+                <tr class="">
+                    <td>{{item.what}}</td>
+                    <td>
+                        {{item.where}}
+                        <a class="float-left mx-1" href="{{item.remove_url}}">
+                            <span class="material-icons text-danger">
+                            restore_from_trash
+                            </span>
+                        </a>
+                        <a class="float-left mx-1" href="{{item.edit_url}}">
+                            <span class="material-icons text-success">
+                            edit
+                            </span>
+                        </a>
+
+
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <div class="container p-5 text-center">
+            <h3>شما هنوز چیزی وارد نکرده اید.</h3>
+        </div>
+    {% endif %}
+      <script>
+      function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        if (filter.length > 2) {
+            
+        
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+                } else {
+                tr[i].style.display = "none";
+                }
+            }       
+            }
+        }
+      }
+      </script>
+</div>
+
+
+   
+{% endblock content %}
+
+
+
+{% block jq %}
+    <script>
+        $( document ).ready(function() {
+    setTimeout(function(){
+        $( "#repass" ).val(null);
+        $( "#myInput" ).val(null);
+        $( "#id_what" ).val(null);
+        $( "#id_where" ).val(null);
+        $( "#password" ).val(null);
+
+        },500);
+
+        $('tr').each(function() {
+            $(this).show();
+
+            
+        });
+    });
+    </script>
+{% endblock jq %}
+    
+    

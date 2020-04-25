@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+{% load widget_tweaks %}
+
+<div class="container mt-2 text-right">
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <h4>تغییر رمز عبور</h4>
+            <form class="p-3 bg-white myrounded hover_shadow" action="" method="POST">
+                {% csrf_token %}
+                <div class="row m-0 p-0">
+                    {{form.old_password|add_class:"form-control"|attr:"placeholder:رمز عبور قبلی"}}
+                </div>
+                <div class="row m-0 p-0">
+                    {{form.new_password1|add_class:"form-control"|attr:"placeholder:رمز عبور جدید"}}
+                </div>
+                <div class="row m-0 p-0">
+                    {{form.new_password2|add_class:"form-control"|attr:"placeholder:تکرار رمز عبور"}}
+                </div>
+                <div class="row m-0 p-0 justify-content-center mt-2 pt-3">
+                    <button class="btn btn-success">تغییر</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock content %}
+
+
+{% block table %}
+    
+{% endblock table %}
+    

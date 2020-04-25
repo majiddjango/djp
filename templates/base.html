@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    {% load pwa %}
+<head>
+    {% load static %}
+    {% progressive_web_app_meta %}
+    <title>
+        {% block title %} {{title}} {% endblock title %}
+    </title>
+    <meta charset="UTF-8">
+    <!--===============================================================================================-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="{% static 'core/css/bootstrap.min.css' %}"
+    media="screen,projection" />    
+    <style>
+        @font-face {
+            font-family: vazir;
+            src: url("{% static 'core/font/bkoodak.ttf' %}") format('truetype');
+            font-weight: normal;
+        }
+        *:not(i){
+            font-family: 'vazir';
+        }
+
+</style>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'core/css/main.css' %}"
+    media="screen,projection" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet">
+
+</head>
+
+<body dir="rtl">
+    <div class="container-fluid p-0 m-0">
+        {% include 'core/nav.html' %}
+    </div>
+    <div class="container-fluid p-0 m-0 my-1 px-3">
+        
+        {% if messages %}
+            {% include 'core/messages.html' %}
+        {% endif %}
+            
+    </div>
+
+
+    <div class="container-fluid mb-5 p-0 m-0">
+        {% block content %}
+        {% endblock content %}
+
+        
+            
+
+
+    </div>
+    <div class="container-fluid mt-3 p-0 m-0">
+        {% include 'core/footer.html' %}
+    </div>
+
+    
+    <script type="text/javascript" src="{% static 'core/js/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'core/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js" integrity="sha256-/H4YS+7aYb9kJ5OKhFYPUjSJdrtV6AeyJOtTkw6X72o=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{% static 'core/js/idbs.js' %}"></script>
+    <script type="text/javascript" src="{% static 'core/js/idbop.js' %}"></script>
+    
+    <script type="text/javascript" src="{% static 'core/js/main.js' %}"></script>
+
+    
+    {% block jq %}
+        
+    {% endblock jq %}
+        
+
+</body>
+
+</html>

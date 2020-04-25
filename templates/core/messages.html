@@ -1,0 +1,14 @@
+{% for message in messages %}
+<div class="alert 
+{% if message.tags == 'error' %}
+  alert-danger
+{% else %}
+alert-{{message.tags}}
+{% endif %}
+ alert-dismissible fade show text-right mb-1 p-2 w-100" role="alert">
+    {{ message }}
+    <button type="button" class="close p-2" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{% endfor %}

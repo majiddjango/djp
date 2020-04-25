@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+{% load widget_tweaks %}
+
+<div class="container mt-2 text-right">
+    <div class="row justify-content-center mb-4">
+        <div class="col-8 col-md-6">
+            <nav>
+                <div class="nav nav-tabs nav-justified index shadow" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-vorood-tab" data-toggle="tab" href="#nav-vorood" role="tab"
+                        aria-controls="nav-vorood" aria-selected="true">ورود</a>
+                    <a class="nav-item nav-link" id="nav-sabtNam-tab" data-toggle="tab" href="#nav-sabtNam" role="tab"
+                        aria-controls="nav-sabtNam" aria-selected="false">ثبت نام</a>
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane m-0 p-3 fade show active index shadow" id="nav-vorood" role="tabpanel" aria-labelledby="nav-vorood-tab">
+                    <form class="px-3" action="" method="POST">
+                        {% csrf_token %}
+                        <input type="text" name="log" value="1" id="" hidden>
+                        <div class="row my-1">
+                            {{authform.username|add_class:"form-control"|attr:"placeholder:نام کاربری" }}
+                        </div>
+                        <div class="row my-1">
+                            {{authform.password|add_class:"form-control"|attr:"placeholder:رمز عبور" }}
+                        </div>
+
+                        <div class="row my-1 text-center">
+                            <button class="btn btn-success mx-auto" type="submit">ورود</button>
+                        </div>
+
+                    </form>
+
+                </div>
+                <div class="tab-pane m-0 p-3 fade index shadow" id="nav-sabtNam" role="tabpanel" aria-labelledby="nav-sabtNam-tab">
+                    <form class="px-3" action="" method="POST">
+                        {% csrf_token %}
+                        <input type="text" name="auth" value="1" id="" hidden>
+                        <div class="row my-1">
+                            {{userform.username|add_class:"form-control"|attr:"placeholder:نام کاربری" }}
+                        </div>
+                        <div class="row my-1">
+                            {{userform.password1|add_class:"form-control"|attr:"placeholder:رمز عبور" }}
+                        </div>
+                        <div class="row my-1">
+                            {{userform.password2|add_class:"form-control"|attr:"placeholder:تکرار رمز عبور" }}
+                        </div>
+
+                        <div class="row my-1 text-center">
+                            <button class="btn btn-success mx-auto" type="submit">ثبت نام</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock content %}
+
+{% block table %}
+    
+{% endblock table %}
+    

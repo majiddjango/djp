@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+    {% load pwa %}
+<head>
+    {% progressive_web_app_meta %}
+    {% load static %}
+    <title>
+        {% block title %} {{title}} {% endblock title %}
+    </title>
+    <meta charset="UTF-8">
+    <!--===============================================================================================-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="{% static 'core/css/bootstrap.min.css' %}"
+    media="screen,projection" />    
+    <style>
+        @font-face {
+            font-family: vazir;
+            src: url("{% static 'core/font/bkoodak.ttf' %}") format('truetype');
+            font-weight: normal;
+        }
+        *:not(i){
+            font-family: 'vazir';
+        }
+
+</style>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'core/css/main.css' %}"
+    media="screen,projection" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet">
+
+</head>
+
+<body dir="rtl">
+    <div class="container-fluid p-0 m-0">
+        {% include 'core/nav.html' %}
+    </div>
+    <div class="container-fluid p-0 m-0 my-1 px-3">
+        
+        {% if messages %}
+            {% include 'core/messages.html' %}
+        {% endif %}
+            
+    </div>
+
+
+    <div class="container-fluid p-0 m-0">
+        {% block content %}
+        {% endblock content %}
+        {% load widget_tweaks %}
+
+<div class="container mt-2 mx-auto">
+    <div class="card text-right hover_shadow">
+        <div class="card-header">
+            چی رو کجا گذاشتی؟
+        </div>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="card-body">
+                <div class="row mt-1">
+                    <div class="col-1"><label for="id_what">چی؟</label></div>
+                    <div class="col-11">
+                        {{ form.what|add_class:"form-control"|attr:"placeholder:مثلا کفش، مسواک" }}
+                    </div>
+                </div>
+                <div class="row mt-1">
+                    <div class="col-1"><label for="id_where">کجا؟</label></div>
+                    <div class="col-11">
+                        {{ form.where|add_class:"form-control"|attr:"placeholder:تو کشو سوم جا کفشی" }}
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer text-muted">
+                <div class="row">
+                    <div class="col-3">
+                        <div class="form-check">
+                            <input type="checkbox" name="passed" class="form-check-input" id="crypt">
+                            <label class="form-check-label mr-3" for="crypt">با رمز ذخیره کن</label>
+                        </div>
+        
+                    </div>
+                    <div class="col-5">
+                        <div class="form-group">
+                          <input type="password" class="form-control" id="password" aria-describedby="helpId" placeholder="رمز برای ذخیره سازی">
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <button type="submit" class="btn btn-primary">ذخیره</button>
+                    </div>
+                </div>
+                  
+              
+            </div>
+        </form>
+
+    </div>
+</div>
+
+
+        
+        {% block table %}
+        <div class="container mt-2 pt-2">
+            <div class="row my-1 bg-white m-0 p-3 myrounded">
+                <div class="col-12 col-md-6 mt-1">
+                    <input  class="form-control" name="search" type="text" id="myInput" onkeyup="myFunction()" placeholder="جستجو ..." >
+                </div>
+        
+                <div class="col-12 col-md-6 mt-1">
+                    <input  class="form-control" type="password" id="repass" placeholder="رمز خود را که هنگام رمز نگاری وارد کرده اید بنویسید."> 
+                </div>
+        
+            </div>
+            <table id="myTable" class="table table-hover table-striped text-right bg-white">
+                <thead class="">
+                    <tr>
+                        <th>چی</th>
+                        <th>کجا</th>
+                    </tr>
+                </thead>
+                <tbody class="" id="offlinedata">
+                </tbody>
+            </table>
+              <script>
+              function myFunction() {
+                var input, filter, table, tr, td, i, txtValue;
+                input = document.getElementById("myInput");
+                filter = input.value.toUpperCase();
+                if (filter.length > 2) {
+                    
+                
+                    table = document.getElementById("myTable");
+                    tr = table.getElementsByTagName("tr");
+                    for (i = 0; i < tr.length; i++) {
+                    td = tr[i].getElementsByTagName("td")[0];
+                    if (td) {
+                        txtValue = td.textContent || td.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                        } else {
+                        tr[i].style.display = "none";
+                        }
+                    }       
+                    }
+                }
+              }
+              </script>
+        </div>
+        
+        {% endblock table %}
+            
+
+
+    </div>
+    <div class="container-fluid p-0 m-0">
+        {% include 'core/footer.html' %}
+    </div>
+
+    
+    <script type="text/javascript" src="{% static 'core/js/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'core/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js" integrity="sha256-/H4YS+7aYb9kJ5OKhFYPUjSJdrtV6AeyJOtTkw6X72o=" crossorigin="anonymous"></script>
+    
+    <script type="text/javascript" src="{% static 'core/js/main.js' %}"></script>
+    <script type="text/javascript" src="{% static 'core/js/idbs.js' %}"></script>
+    <script type="text/javascript" src="{% static 'core/js/idbop.js' %}"></script>
+</body>
+
+</html>
