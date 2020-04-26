@@ -23,7 +23,7 @@ urlpatterns = [
     path('accounts/',include('accounts.urls')),
     path('',include('core.urls')),
     path('', include('pwa.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 
 
