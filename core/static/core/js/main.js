@@ -8,7 +8,7 @@ $( document ).ready(function() {
     });
     
     
-    fetch('http://127.0.0.1:8000/getdata').then(function (response) {
+    fetch('/getdata').then(function (response) {
         return response.json();
     }).then(function (jsondata) {
         dbPromise.then(function (db) {
@@ -50,6 +50,49 @@ $( document ).ready(function() {
         }
 
         });
+
+        $('#decrytAll').click(function(){
+            $('.passed').each(function() {
+                var inp = $(this).html()
+                var pass = $('#repass').val()
+                var decrypted = CryptoJS.AES.decrypt(inp, pass);
+                console.log(decrypted.toString(CryptoJS.enc.Utf8));
+                
+                $(this).next().html(decrypted.toString(CryptoJS.enc.Utf8))
+    
+                
+            });
+    
+
+        });
+
+
+        $('#myInput').keyup(function(){
+            
+              var input, filter, table, tr, td, i, txtValue;
+              input = document.getElementById("myInput");
+              filter = input.value.toUpperCase();
+              if (filter.length > 2) {
+                  table = document.getElementById("myTable");
+                  tr = table.getElementsByTagName("tr");
+                  for (i = 0; i < tr.length; i++) {
+                  td = tr[i].getElementsByTagName("td")[0];
+                  if (td) {
+                      txtValue = td.textContent || td.innerText;
+                      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                      tr[i].style.display = "";
+                      } else {
+                      tr[i].style.display = "none";
+                      }
+                  }       
+                  }
+              } else{
+
+                $('tr').show();
+              }
+      
+        });
+
         
     // $('#crypt').change(function() {
     //     if ($('#crypt').is(':checked')) {
@@ -69,16 +112,16 @@ $( document ).ready(function() {
 
 
 
-      $( "#repass" ).keyup(function() {
-        $('.passed').each(function() {
-            var inp = $(this).next().html()
-            var pass = $('#repass').val()
-            var decrypted = CryptoJS.AES.decrypt(inp, pass);
-            $(this).html(decrypted.toString(CryptoJS.enc.Utf8))
+    //   $( "#repass" ).keyup(function() {
+    //     $('.passed').each(function() {
+    //         var inp = $(this).next().html()
+    //         var pass = $('#repass').val()
+    //         var decrypted = CryptoJS.AES.decrypt(inp, pass);
+    //         $(this).html(decrypted.toString(CryptoJS.enc.Utf8))
 
             
-        });
-      });
+    //     });
+    //   });
 
       $("#subbutton").click(function(e){
         e.preventDefault();

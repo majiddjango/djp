@@ -48,14 +48,16 @@
 <div class="container mb-5 mt-2 pb-5 pt-2">
     {% if items %}
     <div class="row my-1 bg-white m-0 p-3 myrounded">
-        <div class="col-12 col-md-6 mt-1">
-            <input  class="form-control" name="search" type="text" id="myInput" onkeyup="myFunction()" placeholder="جستجو ..." >
+        <div class="col-12 col-md-4 mt-1">
+            <input  class="form-control" name="search" type="text" id="myInput" placeholder="جستجو ..." >
         </div>
 
-        <div class="col-12 col-md-6 mt-1">
+        <div class="col-12 col-md-4 mt-1">
             <input  class="form-control" type="password" id="repass" placeholder="رمز خود را که هنگام رمز نگاری وارد کرده اید بنویسید."> 
         </div>
-
+        <div class="col-12 col-md-2 mt-1">
+            <button class="btn btn-success" id='decrytAll'>رمزگشایی</button> 
+        </div>
     </div>
     <table id="myTable" class="table table-hover mb-5 table-striped text-right bg-white">
         <thead class="">
@@ -67,9 +69,15 @@
         <tbody class="">
             {% for item in items %}
                 <tr class="">
-                    <td>{{item.what}}</td>
+                    
                     <td>
-                        {{item.where}}
+                        <span class="passed" hidden>{{item.what}}</span>
+                        <span>{{item.what}}</span>
+                    </td>
+                    <td>
+                        <span class="passed" hidden>{{item.where}}</span>
+                        <span>{{item.where}}</span>
+                        
                         <a class="float-left mx-1" href="{{item.remove_url}}">
                             <span class="material-icons text-danger">
                             restore_from_trash
@@ -92,30 +100,6 @@
             <h3>شما هنوز چیزی وارد نکرده اید.</h3>
         </div>
     {% endif %}
-      <script>
-      function myFunction() {
-        var input, filter, table, tr, td, i, txtValue;
-        input = document.getElementById("myInput");
-        filter = input.value.toUpperCase();
-        if (filter.length > 2) {
-            
-        
-            table = document.getElementById("myTable");
-            tr = table.getElementsByTagName("tr");
-            for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[0];
-            if (td) {
-                txtValue = td.textContent || td.innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                tr[i].style.display = "";
-                } else {
-                tr[i].style.display = "none";
-                }
-            }       
-            }
-        }
-      }
-      </script>
 </div>
 
 

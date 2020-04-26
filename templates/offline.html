@@ -44,60 +44,31 @@
             
     </div>
 
-
-    <div class="container-fluid mb-5 p-0 m-0">
-        <div class="container mb-5 mt-2 pb-5 pt-2">
-            <div class="row my-1 bg-white m-0 p-3 myrounded">
-                <div class="col-12 col-md-6 mt-1">
-                    <input  class="form-control" name="search" type="text" id="myInput" onkeyup="myFunction()" placeholder="جستجو ..." >
-                </div>
-        
-                <div class="col-12 col-md-6 mt-1">
-                    <input  class="form-control" type="password" id="repass" placeholder="رمز خود را که هنگام رمز نگاری وارد کرده اید بنویسید."> 
-                </div>
-        
+    <div class="container mb-5 mt-2 pb-5 pt-2">
+        <div class="row my-1 bg-white m-0 p-3 myrounded">
+            <div class="col-12 col-md-4 mt-1">
+                <input  class="form-control" name="search" type="text" id="myInput" placeholder="جستجو ..." >
             </div>
-            <table id="myTable" class="table table-hover mb-5 table-striped text-right bg-white">
-                <thead class="">
-                    <tr>
-                        <th>چی</th>
-                        <th>کجا</th>
-                    </tr>
-                </thead>
-                <tbody class="" id="offlineme">
-                </tbody>
-            </table>
-              <script>
-              function myFunction() {
-                var input, filter, table, tr, td, i, txtValue;
-                input = document.getElementById("myInput");
-                filter = input.value.toUpperCase();
-                
-                    
-                
-                    table = document.getElementById("myTable");
-                    tr = table.getElementsByTagName("tr");
-                    for (i = 0; i < tr.length; i++) {
-                    td = tr[i].getElementsByTagName("td")[0];
-                    if (td) {
-                        txtValue = td.textContent || td.innerText;
-                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                        tr[i].style.display = "";
-                        } else {
-                        tr[i].style.display = "none";
-                        }
-                    }       
-                    }
-
-              }
-              </script>
+    
+            <div class="col-12 col-md-4 mt-1">
+                <input  class="form-control" type="password" id="repass" placeholder="رمز خود را که هنگام رمز نگاری وارد کرده اید بنویسید."> 
+            </div>
+            <div class="col-12 col-md-2 mt-1">
+                <button class="btn btn-success" id='decrytAll'>رمزگشایی</button> 
+            </div>
         </div>
-        
-        
-            
-
-
+        <table id="myTable" class="table table-hover mb-5 table-striped text-right bg-white">
+            <thead class="">
+                <tr>
+                    <th>چی</th>
+                    <th>کجا</th>
+                </tr>
+            </thead>
+            <tbody class="" id='offlineme'>
+            </tbody>
+        </table>
     </div>
+    
     <div class="container-fluid mt-3 p-0 m-0">
         {% include 'core/footer.html' %}
     </div>
@@ -132,15 +103,10 @@ var dbPromise = idb.open('feeds-db', 1, function (upgradeDb) {
                 feedsData = cursor.value[field];
                 for (var key in feedsData) {
                     if (key == 'what') {
-                        var wwat = '<td>' + feedsData[key] + '</td>';
+                        var wwat = '<td><span class="passed" hidden>'+feedsData[key]+'</span><span>'+feedsData[key]+'</span></td>';
                     }
                     if (key == 'where') {
-                        var wwher = '<td>' + feedsData[key] + '</td>';
-                    }
-                    if (key == 'passed') {
-                        if (feedsData[key]) {
-                            var wwher = '<td> <div> <span class="passed">"رمز نگاری شده"</span> <span hidden>' + feedsData['where'] + '</span></div></td>';
-                        }
+                        var wwher = '<td><span class="passed" hidden>'+feedsData[key]+'</span><span>'+feedsData[key]+'</span></td>';
                     }
                 }
                 post = post +'<tr>'+ wwat + wwher + '</tr>';

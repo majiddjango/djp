@@ -5,7 +5,7 @@ var dbPromise = idb.open('feeds-db', 1, function (upgradeDb) {
 });
 
 
-fetch('http://127.0.0.1:8000/getdata').then(function (response) {
+fetch('/getdata').then(function (response) {
     return response.json();
 }).then(function (jsondata) {
     dbPromise.then(function (db) {
